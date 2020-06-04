@@ -10,16 +10,24 @@
 import SwiftUI
 
 
-class Email : ObservableObject{
-    @Published var email_addr:String?
+class Email : ObservableObject {
+    @Published var email_addr:String
     @Published var emails = [InboxModel]()
+    
+    //  init method
+    init() {
+        self.email_addr = ""
+        genEmailAddr()
+    }
+    
     //    generates an email address
-    func genEmailAddr() {
+    func genEmailAddr() -> Void {
         //        list of acceptable chars
         let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         //         returns a random permutation of letters; string of up to length 9 for email addr
         self.email_addr = String((0..<9).map{ _ in letters.randomElement()!})
     }
+    
     //    performs HTTP Request to get emails from server
     func loadEmails(){
         //        make the HTTP GET request to return the JSON
@@ -50,12 +58,7 @@ class Email : ObservableObject{
     }
     //     getter for email addr
     func getEmailAddr() -> String {
-        if email_addr != nil{
-            return "Current Address: \(email_addr!)@1secmail.com"
-        }
-        else{
-            return "Tap \"Generate New Email\" to get started! "
-        }
+        return "Current Address: \(email_addr)@1secmail.com"
     }
     
     //    getter for emails
