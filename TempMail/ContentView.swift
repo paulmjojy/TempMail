@@ -22,7 +22,7 @@ struct ContentView: View {
 //            Generate new email button
             Button(action: {
 //                generates new email addr
-                self.email.GenEmail()
+                self.email.genEmailAddr()
             }) {
 //                button txt
                 Text("Generate New Email")
@@ -40,16 +40,23 @@ struct ContentView: View {
             
             Spacer()
 //            List of emails attached to above address
-            List {
-                MessageRow(messageInfo: InboxModel(id: 1234,
-                                                   from: "sender@example.com",
-                                                   subject: "example subject",
-                                                   date: "Today"))
-                MessageRow(messageInfo: InboxModel(id: 1234,
-                                                   from: "sender@example.com",
-                                                   subject: "example subject",
-                                                   date: "Today"))
+            Button(action: {
+                self.email.loadEmails()
+            }) {
+                Text("Refresh")
             }
+            List(self.email.getEmails()) { msg in
+                MessageRow(messageInfo: msg)
+                
+//                MessageRow(messageInfo: InboxModel(id: 1234,
+//                                                   from: "sender@example.com",
+//                                                   subject: "example subject",
+//                                                   date: "Today"))
+//                MessageRow(messageInfo: InboxModel(id: 1234,
+//                                                   from: "sender@example.com",
+//                                                   subject: "example subject",
+//                                                   date: "Today"))
+            }.onAppear(perform: email.loadEmails)
             
         }
     }

@@ -7,9 +7,12 @@
 //
 
 import Foundation
+public struct Emails: Codable {
+    var inbox: [InboxModel]
+}
 
-public struct InboxModel: Hashable, Codable {
-    let id: Int
+public struct InboxModel: Hashable, Codable, Identifiable {
+    public let id: Int
     let from: String
     let subject: String
     let date: String
