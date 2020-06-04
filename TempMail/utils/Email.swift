@@ -31,8 +31,7 @@ class Email : ObservableObject {
     //    performs HTTP Request to get emails from server
     func loadEmails(){
         //        make the HTTP GET request to return the JSON
-        if email_addr != nil {
-            //            create url request
+        //            create url request
             guard let url = URL(string: "https://www.1secmail.com/api/v1/?action=getMessages&login=test&domain=1secmail.com")
                 else{
                     print("Invalid URL")
@@ -51,10 +50,6 @@ class Email : ObservableObject {
                 }
                 print("Fetch failed: \(error?.localizedDescription ?? "Unknown Error")")
             }.resume()
-        }
-        else{
-            
-        }
     }
     //     getter for email addr
     func getEmailAddr() -> String {
